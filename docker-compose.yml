@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  mysql:
+    image: 'mysql:8.0.32'
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - laradb:/var/lib/mysql
+volumes:
+  laradb:
