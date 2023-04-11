@@ -2,11 +2,13 @@
 
 namespace App\Http\Resources;
 
+use GDebrauwer\Hateoas\Traits\HasLinks;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomerResource extends JsonResource
 {
+    use HasLinks;
     /**
      * Transform the resource into an array.
      *
@@ -25,11 +27,7 @@ class CustomerResource extends JsonResource
                 'state' => $this->address->state->acronym
             ],
             'gender' => $this->gender->abbreviation,
-            'links' => [
-                'self' => route('customers.show', ['customer' => $this->id]),
-                'GET' => route('customers.index'),
-                'DELETE' => route('customers.destroy', ['customer' => $this->id]),
-            ],
+            'links' => $this->links(),
         ];
     }
 }

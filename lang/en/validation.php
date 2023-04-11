@@ -150,7 +150,7 @@ return [
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
-
+    'cpf' => 'The :attribute field must be a valid CPF.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

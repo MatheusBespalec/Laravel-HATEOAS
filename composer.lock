@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abcb6a2b1faac5449c33614e5f4189ad",
+    "content-hash": "7953cdddb7bc62a2d25977aa12858424",
     "packages": [
         {
             "name": "brick/math",
@@ -503,6 +503,73 @@
                 }
             ],
             "time": "2022-02-20T15:07:15+00:00"
+        },
+        {
+            "name": "gdebrauwer/laravel-hateoas",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gdebrauwer/laravel-hateoas.git",
+                "reference": "1ba743cc22b619833ec9aca80aeeda04dd0d40b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gdebrauwer/laravel-hateoas/zipball/1ba743cc22b619833ec9aca80aeeda04dd0d40b5",
+                "reference": "1ba743cc22b619833ec9aca80aeeda04dd0d40b5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^9.0|^10.0",
+                "illuminate/support": "^9.0|^10.0",
+                "php": "^8.0|^8.1|^8.2",
+                "spatie/once": "^3.0"
+            },
+            "require-dev": {
+                "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^2.0",
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GDebrauwer\\Hateoas\\HateoasServiceProvider"
+                    ],
+                    "aliases": {
+                        "Hateoas": "GDebrauwer\\Hateoas\\Hateoas"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GDebrauwer\\Hateoas\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Günther Debrauwer"
+                }
+            ],
+            "description": "Expose the authorization logic of your REST API using HATEOAS links on your Laravel API resources",
+            "homepage": "https://github.com/gdebrauwer/laravel-hateoas",
+            "keywords": [
+                "HATEOAS",
+                "api",
+                "gdebrauwer",
+                "laravel",
+                "rest-api"
+            ],
+            "support": {
+                "issues": "https://github.com/gdebrauwer/laravel-hateoas/issues",
+                "source": "https://github.com/gdebrauwer/laravel-hateoas/tree/2.1.0"
+            },
+            "time": "2023-02-15T17:09:15+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -2942,6 +3009,68 @@
                 }
             ],
             "time": "2023-01-12T18:13:24+00:00"
+        },
+        {
+            "name": "spatie/once",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/once.git",
+                "reference": "aab3fc8694e7caec98b2d330c4a8420391c7559d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/once/zipball/aab3fc8694e7caec98b2d330c4a8420391c7559d",
+                "reference": "aab3fc8694e7caec98b2d330c4a8420391c7559d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.21",
+                "symfony/var-dumper": "^5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Once\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A magic memoization function",
+            "homepage": "https://github.com/spatie/once",
+            "keywords": [
+                "cache",
+                "callable",
+                "memoization",
+                "once",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/once/tree/3.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-04-21T12:23:20+00:00"
         },
         {
             "name": "symfony/console",
