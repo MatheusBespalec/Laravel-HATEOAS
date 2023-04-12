@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('genders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('abbreviation');
+            $table->string('name', 50);
+            $table->char('abbreviation', 1);
         });
     }
 

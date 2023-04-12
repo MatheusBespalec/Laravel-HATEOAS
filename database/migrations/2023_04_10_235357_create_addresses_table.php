@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('address');
-            $table->string('city');
+            $table->string('address', 100);
+            $table->string('city', 50);
             $table->foreignIdFor(State::class)
                 ->constrained()
                 ->restrictOnDelete()

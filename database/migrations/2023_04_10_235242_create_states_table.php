@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('acronym');
+            $table->string('name', 50);
+            $table->char('acronym', 2);
         });
     }
 
