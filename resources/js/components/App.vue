@@ -187,7 +187,6 @@ import axios from 'axios';
                         this.states = response.data.data;
                     })
                     .catch(error => {
-                        console.log(error);
                         alert('Erro ao carregar estados');
                     });
             },
@@ -197,7 +196,6 @@ import axios from 'axios';
                         this.genders = response.data.data;
                     })
                     .catch(error => {
-                        console.log(error);
                         alert('Erro ao carregar gêneros');
                     });
             },
@@ -211,7 +209,6 @@ import axios from 'axios';
                         this.links = response.data.meta;
                     })
                     .catch(error => {
-                        console.log(error);
                         alert('Erro ao carregar clientes');
                     });
             },
@@ -223,7 +220,6 @@ import axios from 'axios';
                         this.resetSearchCustomer();
                     })
                     .catch(error => {
-                        console.log(error);
                         alert('Erro ao carregar clientes');
                     });
             },
@@ -232,10 +228,8 @@ import axios from 'axios';
                     .then(response => {
                         this.customers = response.data.data;
                         this.links = response.data.meta;
-                        console.log(response.data)
                     })
                     .catch(error => {
-                        console.log(error);
                         alert('Erro ao carregar clientes');
                     });
             },
@@ -246,7 +240,6 @@ import axios from 'axios';
                         alert('Cliente excluído com sucesso!')
                     })
                     .catch(error => {
-                        console.log(error);
                         alert('Erro ao excluir cliente');
                     });
             },

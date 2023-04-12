@@ -22,8 +22,8 @@ Route::apiResource('customers', App\Http\Controllers\Api\CustomerController::cla
 
 Route::get('/genders', function () {
     return new GenderCollection(Gender::all());
-});
+})->name('genders.index');
 
 Route::get('/states', function () {
     return new StateCollection(State::all());
-});
+})->name('states.index');
