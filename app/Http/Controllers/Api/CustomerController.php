@@ -11,6 +11,7 @@ use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Gender;
 use App\Models\State;
+use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,52 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new CustomerCollection(Customer::query()->orderByDesc('id')->paginate());
+        $customerQuery = Customer::query();
+
+        if ($request->has('name')) {
+            $customerQuery->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+        if ($request->has('cpf')) {
+            $customerQuery->where('cpf', 'like', '%' . $request->input('cpf') . '%');
+        }
+        if ($request->has('birthdate_from')) {
+            $date = DateTime::createFromFormat('Y-m-d', $request->input('birthdate_from'));
+            if ($date) {
+                $customerQuery->whereDate('birthdate', '>=', $request->input('birthdate_from'));
+            }
+        }
+        if ($request->has('birthdate_until')) {
+            $date = DateTime::createFromFormat('Y-m-d', $request->input('birthdate_until'));
+            if ($date) {
+                $customerQuery->whereDate('birthdate', '>=', $request->input('birthdate_until'));
+            }
+        }
+        if ($request->has('gender')) {
+            $gender = Gender::query()->where('abbreviation', $request->input('gender'))->first();
+            if ($gender) {
+                $customerQuery->where('gender_id', '=', $gender->id);
+            }
+        }
+        if ($request->has('address') || $request->has('state') || $request->has('city')) {
+            $customerQuery->whereHas('address', function ($query) use ($request) {
+                if ($request->has('address')) {
+                    $query->where('address', 'like', '%' . $request->input('address') . '%');
+                }
+                if ($request->has('state')) {
+                    $state = State::query()->where('acronym', $request->input('state'))->first();
+                    if ($state) {
+                        $query->where('state_id', '=', $state->id);
+                    }
+                }
+                if ($request->has('city')) {
+                    $query->where('city', 'like', '%' . $request->input('city') . '%');
+                }
+            });
+        }
+
+        return new CustomerCollection($customerQuery->orderByDesc('id')->paginate(3));
     }
 
     /**

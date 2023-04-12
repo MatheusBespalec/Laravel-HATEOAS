@@ -52,9 +52,56 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        Lista de Clientes
+                        Listagem de Clientes
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="name" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" id="name" v-model="searchCustomer.name">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="cpf" class="form-label">CPF:</label>
+                                <input type="text" class="form-control" id="cpf" v-model="searchCustomer.cpf">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="birthdate" class="form-label">Data Nasc. De:</label>
+                                <input type="date" class="form-control" id="birthdate" v-model="searchCustomer.birthdate_from">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="birthdate" class="form-label">Data Nasc. Até:</label>
+                                <input type="date" class="form-control" id="birthdate" v-model="searchCustomer.birthdate_until">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="gender" class="form-label">Sexo:</label>
+                                <select class="form-select" id="gender" v-model="searchCustomer.gender">
+                                    <option selected disabled>Selecione...</option>
+                                    <option v-for="gender in genders" :key="gender.id" :value="gender.abbreviation">{{ gender.name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="address" class="form-label">Endereço:</label>
+                                <input type="text" class="form-control" id="address" v-model="searchCustomer.address">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="state" class="form-label">Estado:</label>
+                                <select class="form-select" id="state" v-model="searchCustomer.state">
+                                    <option selected disabled>Selecione...</option>
+                                    <option v-for="state in states" :key="state.id" :value="state.acronym">{{ state.name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="city" class="form-label">Cidade:</label>
+                                <input type="text" class="form-control" id="city" v-model="searchCustomer.city">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-3 me-3" @click="searchCustomers()">Buscar</button>
+                        <button class="btn btn-secondary mt-3" @click="clearSearchCustomers()">Limpar</button>
+
+                        <hr>
+
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -85,7 +132,7 @@
                         </div> 
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li v-for="link, key in links.links" :key="key" class="page-item" :class="(link.url == null ? 'disabled' : '') + (link.active ? 'active' : '')"><a class="page-link" :href="link.url ?? '#'" v-html="link.label"></a></li>
+                                <li v-for="link, key in links.links" :key="key" class="page-item" :class="(link.url == null ? 'disabled' : '') + (link.active ? 'active' : '')"><a class="page-link" @click="findPage(link)" v-html="link.label"></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -106,16 +153,27 @@ import axios from 'axios';
                 genders: [],
                 customers: [],
                 links: [],
+                pageQuery: 'page=1',
                 newCustomer: {
-                    name: undefined,
+                    name: '',
                     cpf: '',
                     birthdate: '',
                     address: {
                         address: '',
-                        state: undefined,
+                        state: '',
                         city: '',
                     },
-                    gender: undefined,
+                    gender: '',
+                },
+                searchCustomer: {
+                    name: '',
+                    cpf: '',
+                    birthdate_from: '',
+                    birthdate_until: '',
+                    gender: '',
+                    address: '',
+                    state: '',
+                    city: '',
                 }
             }
         },
@@ -141,6 +199,32 @@ import axios from 'axios';
                     .catch(error => {
                         console.log(error);
                         alert('Erro ao carregar gêneros');
+                    });
+            },
+            searchCustomers() {
+                const queryString = new URLSearchParams(this.searchCustomer).toString();
+                axios.get(`${this.baseUrl}/customers?${this.pageQuery}&${queryString}`, {
+                    params: this.searchCustomer
+                })
+                    .then(response => {
+                        this.customers = response.data.data;
+                        this.links = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('Erro ao carregar clientes');
+                    });
+            },
+            clearSearchCustomers() {
+                axios.get(this.baseUrl + '/customers?page=1')
+                    .then(response => {
+                        this.customers = response.data.data;
+                        this.links = response.data.meta;
+                        this.resetSearchCustomer();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('Erro ao carregar clientes');
                     });
             },
             setCustomers() {
@@ -194,6 +278,24 @@ import axios from 'axios';
                         city: '',
                     },
                     gender: '',
+                }
+            },
+            resetSearchCustomer() {
+                this.searchCustomer = {
+                    name: '',
+                    cpf: '',
+                    birthdate_from: '',
+                    birthdate_until: '',
+                    gender: '',
+                    address: '',
+                    state: '',
+                    city: '',
+                }
+            },
+            findPage(link) {
+                if (link.url) {
+                    this.pageQuery = link.url.split('?')[1]
+                    this.searchCustomers()
                 }
             }
         },
