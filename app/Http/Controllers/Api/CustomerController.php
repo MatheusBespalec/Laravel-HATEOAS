@@ -66,7 +66,7 @@ class CustomerController extends Controller
             });
         }
 
-        return new CustomerCollection($customerQuery->orderByDesc('id')->paginate(3));
+        return new CustomerCollection($customerQuery->orderByDesc('id')->paginate(10));
     }
 
     /**
