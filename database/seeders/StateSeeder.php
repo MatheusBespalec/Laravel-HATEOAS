@@ -39,6 +39,10 @@ class StateSeeder extends Seeder
                 'acronym' => 'CE'
             ],
             [
+                'name' => 'Distrito Federal',
+                'acronym' => 'DF'
+            ],
+            [
                 'name' => 'Espírito Santo',
                 'acronym' => 'ES'
             ],
@@ -117,10 +121,6 @@ class StateSeeder extends Seeder
             [
                 'name' => 'Tocantins',
                 'acronym' => 'TO'
-            ],
-            [
-                'name' => 'Distrito Federal',
-                'acronym' => 'DF'
             ]
         ]);
     }
