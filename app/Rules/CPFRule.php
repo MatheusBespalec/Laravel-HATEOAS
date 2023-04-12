@@ -26,20 +26,15 @@ class CPFRule implements ValidationRule
             return;
         }
         
-        for ($i = 9, $j = 0, $sum = 0; $i > 0; $i--, $j++) {
-            $sum += $cpf[$j] * $i;
-        }
-        $mod = $sum % 11;
-        $dv1 = ($mod < 2) ? 0 : 11 - $mod;
-        
-        for ($i = 10, $j = 0, $sum = 0; $i > 0; $i--, $j++) {
-            $sum += $cpf[$j] * $i;
-        }
-        $mod = $sum % 11;
-        $dv2 = ($mod < 2) ? 0 : 11 - $mod;
-        
-        if ($cpf[9] != $dv1 || $cpf[10] != $dv2) {
-            $fail('validation.cpf')->translate(['attribute' => $attribute]);
+        for ($t = 9; $t < 11; $t++) {
+             
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+                $d += $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf[$c] != $d) {
+                $fail('validation.cpf')->translate(['attribute' => $attribute]);
+            }
         }
     }
 }
