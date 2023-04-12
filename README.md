@@ -8,10 +8,11 @@
 - MySql
 
 ## Instalação
-1. Clone este repositório
-<pre>
+1. Clone este repositório e entre na pasta do projeto
+    <pre>
 ```bash
-git clone https://github.com/MatheusBespalec/cadastro-clientes-laravel
+git clone git@github.com:MatheusBespalec/cadastro-clientes-laravel.git
+cd cadastro-clientes-laravel
 ```
 </pre>
 
@@ -65,3 +66,6 @@ php artisan serve
 </pre>
 
 9. Agora você já pode acessar a aplicação acessando http://127.0.0.1:8000 no navegador de sua preferência
+
+## Informações Adicionais
+- Na raiz do projeto existe o arquivo "cadastro_clientes.json", caso queira importar uma collection do postman com as API's da aplicação, a mesma também deve estar acessivel por este [link](https://www.postman.com/lively-eclipse-953276/workspace/cadastro-cliente/collection/18612505-fcfb15bc-ada7-40da-964b-e3ec135fe859?action=share&creator=18612505).
