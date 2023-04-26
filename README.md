@@ -1,4 +1,4 @@
-# :UPD8 Teste
+# Laravel HATEOAS
 
 ## Requisitos
 - Git
